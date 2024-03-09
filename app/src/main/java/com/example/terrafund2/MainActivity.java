@@ -20,7 +20,7 @@ import com.example.terrafund2.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private home homeFragment;
     private profile profileFragment;
@@ -31,17 +31,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Instantiate fragments
         homeFragment = new home();
         profileFragment = new profile();
         settingsFragment = new settings();
 
-        // Replace default fragment
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.cont, homeFragment)
                 .commit();
 
-        // Set listener for BottomNavigationView
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
@@ -50,10 +47,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment selectedFragment = null;
 
-        if(item.getItemId() == R.id.navigation_home){
+        if (item.getItemId() == R.id.navigation_home) {
             selectedFragment = homeFragment;
-        }
-        else if(item.getItemId() == R.id.navigation_profile){
+        } else if (item.getItemId() == R.id.navigation_profile) {
             selectedFragment = profileFragment;
         } else if (item.getItemId() == R.id.navigation_settings) {
             selectedFragment = settingsFragment;
@@ -66,6 +62,20 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             return true;
         }
 
+
+        Button donateButton = findViewById(R.id.donate_button);
+        donateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DonateActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
         return false;
     }
+
 }
