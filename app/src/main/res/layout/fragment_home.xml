@@ -3,7 +3,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-       android:background="@drawable/gradient_pink_blue"
+        android:background="@drawable/gradient_pink_blue"
         >
 
         <androidx.cardview.widget.CardView
@@ -24,12 +24,11 @@
                 android:id="@+id/donate_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Donate"
-                android:backgroundTint="@color/siren"
                 android:layout_marginLeft="295dp"
                 android:layout_marginTop="25dp"
+                android:backgroundTint="@color/siren"
 
-                />
+                android:text="Donate" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -44,6 +43,45 @@
                 android:textSize="24sp"
                 android:padding="16dp"/>
         </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:text="Declaration 3"
+                android:textSize="24sp"
+                android:padding="16dp"/>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:text="Declaration 2"
+                android:textSize="24sp"
+                android:padding="16dp"/>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:text="Declaration 4"
+                android:textSize="24sp"
+                android:padding="16dp"/>
+        </androidx.cardview.widget.CardView>
+
+
+
 
 
 
