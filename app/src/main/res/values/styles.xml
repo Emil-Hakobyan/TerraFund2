@@ -5,6 +5,15 @@
         <item name="cornerSize">10%</item>
     </style>
 
-
+    <style name="RadioButtonTheme" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="colorControlActivated">@color/viol</item>
+    </style>
+    <style name="MyTabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabSelectedTextColor">@color/viol</item>
+        <item name="tabTextAppearance">@style/MyTabTextAppearance</item>
+    </style>
+    <style name="MyTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
 
 </resources>

@@ -5,8 +5,10 @@
     android:id="@+id/Linear1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/siren"
-    android:orientation="vertical">
+    android:background="@drawable/gradient_pink_blue"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,7 +23,9 @@
             android:src="@drawable/ic_profile"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.MyApp.Image"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="selectProfileImage" />
+
 
         <TextView
             android:id="@+id/username"
@@ -35,6 +39,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
+        <ImageButton
+            android:id="@+id/logout"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="28dp"
+            android:src="@drawable/ic_exit"
+            android:background="?attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
 
@@ -53,8 +67,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tab_layout"
+            style="@style/MyTabLayout"
             app:tabGravity="fill"
             app:tabMode="fixed"
+            app:tabIndicatorFullWidth="false"
             android:background="#FFFFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,12 +79,12 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Declarations" />
+                android:text="Posts" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Budget" />
+                android:text="Trucks" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
@@ -83,8 +99,8 @@
             android:layout_height="match_parent"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </LinearLayout>
-
-

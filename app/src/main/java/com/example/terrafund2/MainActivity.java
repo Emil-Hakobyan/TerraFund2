@@ -1,108 +1,83 @@
+// MainActivity.java
 package com.example.terrafund2;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
-import com.example.terrafund2.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+public class MainActivity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+    private AddPostFragment addPostFragment = new AddPostFragment();
+    private home homeFragment = new home();
+    private profile profileFragment = new profile();
+    private FloatingActionButton addButton;
+    private BottomNavigationView bottomNavigationView;
 
-    private home homeFragment;
-    private profile profileFragment;
-    private create create;
-    private LinearLayout cardContainer;
-    private Button addButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        homeFragment = new home();
-        profileFragment = new profile();
-        create = new create();
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        addButton = findViewById(R.id.floatingActionButton);
 
+        // Set default fragment
+        loadFragment(homeFragment);
 
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.home) {
+                    loadFragment(homeFragment);
+                    return true;
+                } else if (item.getItemId() == R.id.profile) {
+                    loadFragment(profileFragment);
+                    return true;
+                }
+                return false;
+            }
+        });
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.cont, homeFragment)
-                .commit();
-
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(addPostFragment);
+            }
+        });
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment selectedFragment = null;
-
-        if (item.getItemId() == R.id.navigation_home) {
-            selectedFragment = homeFragment;
-        } else if (item.getItemId() == R.id.navigation_profile) {
-            selectedFragment = profileFragment;
-        } else if (item.getItemId() == R.id.add) {
-            selectedFragment = create;
-        }
-
-        if (selectedFragment != null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.cont, selectedFragment)
-                    .commit();
-            return true;
-        }
-        return false;
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.commit();
     }
 
-    public void createAnnouncement(String title, String description) {
-        // Create a new CardView
-        CardView cardView = new CardView(this);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        layoutParams.setMargins(0, 16, 0, 0);
-        cardView.setLayoutParams(layoutParams);
-        cardView.setContentPadding(16, 16, 16, 16);
-        cardView.setCardBackgroundColor(getResources().getColor(android.R.color.white));
-        cardView.setRadius(16);
+    // Method to add a new post
+    public void addPost(String title, String description, String budget, int progress) {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("posts").child(userId);
+        String postId = databaseReference.push().getKey();
+        Post post = new Post(postId, userId, title, description, budget, progress);
 
-        // Create TextViews for title and description
-        TextView titleTextView = new TextView(this);
-        titleTextView.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        titleTextView.setText(title);
-        titleTextView.setTextSize(18);
+        databaseReference.child(postId).setValue(post);
+        Toast.makeText(this, "Post added successfully", Toast.LENGTH_SHORT).show();
 
-        TextView descriptionTextView = new TextView(this);
-        descriptionTextView.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        descriptionTextView.setText(description);
-
-        cardView.addView(titleTextView);
-        cardView.addView(descriptionTextView);
-
-        cardContainer.addView(cardView);
+        // After adding the post, switch back to the HomeFragment
+        loadFragment(homeFragment);
     }
-
 }

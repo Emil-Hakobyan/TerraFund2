@@ -1,0 +1,52 @@
+<!-- item_post.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    >
+
+    <TextView
+        android:id="@+id/title_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textSize="18sp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/description_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/dark_gray"/>
+
+    <TextView
+        android:id="@+id/budget_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Budget"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/dark_gray"/>
+
+    <!-- Progress bar to display the budget scale -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:progress="0"
+        android:max="100"/>
+
+    <!-- TextView to display the budget scale -->
+    <TextView
+        android:id="@+id/budget_scale_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="0% of budget gathered"
+        android:textColor="@color/dark_gray"/>
+
+</LinearLayout>

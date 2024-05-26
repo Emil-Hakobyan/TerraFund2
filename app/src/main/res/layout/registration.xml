@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/gradient_pink_blue"
+
     tools:context=".Register">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -132,7 +134,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="15dp"
-            android:backgroundTint="#177103"
+            android:backgroundTint="@color/viol"
             android:hint="SIGN UP"
             android:textColorHint="@color/white"
             android:textSize="20sp"
@@ -167,7 +169,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign In"
-            android:textColor="#177103"
+            android:textColor="@color/viol"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
